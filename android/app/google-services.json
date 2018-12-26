@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "472634054292",
+    "firebase_url": "https://pictureposter-a84eb.firebaseio.com",
+    "project_id": "pictureposter-a84eb",
+    "storage_bucket": "pictureposter-a84eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472634054292:android:c78729d66d3bc0f8",
+        "android_client_info": {
+          "package_name": "com.picture_poster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472634054292-1uff5h5c8p79il83djbg6l5frj788jpb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhvYpRRC3gR16Wlx3IEEI-ltYW-MZVSvQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
