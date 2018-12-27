@@ -7,13 +7,14 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {Platform, StyleSheet, Text, View, TouchableOpacity, Image, TextInput} from 'react-native';
 import RNImagePicker from 'react-native-image-picker';
 import Firebase from 'react-native-firebase';
 
 export default class NewPost extends Component<{}> {
     state = {
-        uri: ""
+        uri: "",
+        title:"",
     };
     openPicker = () => {
         RNImagePicker.showImagePicker({}, response => {
@@ -34,10 +35,10 @@ export default class NewPost extends Component<{}> {
         Firebase.storage()
             .ref('images/' + new Date().getTime())
             .putFile(this.state.uri, {contentType: 'image/jpeg'})
-            .then(( {downloadURL} ) =>
+            .then(( {downloadURL, title} ) =>
                 Firebase.database()
                     .ref( 'images/'+ new Date().getTime() )
-                    .set({ downloadURL })
+                    .set({ downloadURL, title })
             )
             .then(() => alert('up'))
             .catch(e =>{
@@ -50,6 +51,11 @@ export default class NewPost extends Component<{}> {
         return (
             <View style={styles.container}>
                 <Image source={ {uri: this.state.uri} } style={ styles.image }/>
+                <TextInput
+                    style={{flex:1, height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(title) => this.setState({title})}
+                    value={this.state.title}
+                />
                 <TouchableOpacity style={ styles.button } onPress={ this.openPicker }>
                     <Text>Open</Text>
                 </TouchableOpacity>
