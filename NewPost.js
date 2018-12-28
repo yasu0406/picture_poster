@@ -16,6 +16,7 @@ export default class NewPost extends Component<{}> {
         uri: "",
         title:"",
     };
+
     openPicker = () => {
         RNImagePicker.showImagePicker({}, response => {
             if (response.didCancel) {
@@ -35,17 +36,16 @@ export default class NewPost extends Component<{}> {
         Firebase.storage()
             .ref('images/' + new Date().getTime())
             .putFile(this.state.uri, {contentType: 'image/jpeg'})
-            .then(( {downloadURL, title} ) =>
+            .then(( {downloadURL} ) =>
                 Firebase.database()
                     .ref( 'images/'+ new Date().getTime() )
-                    .set({ downloadURL, title })
+                    .set({ downloadURL, title: this.state.title })
             )
             .then(() => alert('up'))
             .catch(e =>{
                 console.log(e);
                 alert('Error');
             });
-
     };
     render() {
         return (
