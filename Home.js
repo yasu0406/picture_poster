@@ -4,7 +4,7 @@ import Firebase from "react-native-firebase";
 
 export default class Home extends Component<{}> {
     state = {
-        data:[],
+        imageList:[[]]
     };
 
     componentDidMount() {
@@ -12,23 +12,26 @@ export default class Home extends Component<{}> {
             .ref("images")
             .on("value", d => {
                 this.setState({
-                    data: Object.values(d.toJSON()).map(( {downloadURL} ) => downloadURL)
+                    imageList: d.val()
                 });
             });
     }
-
     render() {
-        console.log(this.state);
         return (
             <View style={{ flex: 1 }}>
                 <FlatList
                     renderItem={({ item }) => (
-                        <Image
-                            source={{ uri: item }}
-                            style={{ width: '100%', height: 200 }}
-                        />
+                        <View>
+                            <Image
+                                source={{ uri: item.downloadURL }}
+                                style={{ width: '100%', height: 200 }}
+                            />
+                            <Text>
+                                { item.title }
+                            </Text>
+                        </View>
                     )}
-                    data={this.state.data}
+                    data={ Object.values(this.state.imageList) }
                     keyExtractor={key => key}
                 />
                 <TouchableOpacity
